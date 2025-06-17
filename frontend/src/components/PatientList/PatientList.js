@@ -6,16 +6,31 @@ function PatientList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [patients, setPatients] = useState([]);
 
-  // Fetch patients 
-  useEffect(() => {
+  const fetchPatients = () => {
     fetch("http://127.0.0.1:5000/patients")
       .then((res) => res.json())
       .then((data) => setPatients(data))
-      .catch((error) => console.error("Error fetching patients:", error));
+      .catch((err) => console.error("Error fetching patients:", err));
+  };
+
+  useEffect(() => {
+    fetchPatients();
   }, []);
 
   const handleAddPatient = (newPatient) => {
     setPatients([...patients, newPatient]);
+  };
+
+  const handleDischarge = (id) => {
+    fetch(`http://127.0.0.1:5000/patients/${id}/discharge`, {
+      method: "PATCH",
+    }).then((res) => {
+      if (res.ok) {
+        setPatients(patients.filter((p) => p.id !== id));
+      } else {
+        console.error("Failed to discharge patient");
+      }
+    });
   };
 
   return (
@@ -30,8 +45,16 @@ function PatientList() {
       />
       <div className="patient-list">
         <ul>
-          {patients.map((patient, index) => (
-            <li key={index}>{patient.name}</li>
+          {patients.map((patient) => (
+            <li key={patient.id}>
+              {patient.name}
+              <button
+                onClick={() => handleDischarge(patient.id)}
+                className="discharge-btn"
+              >
+                Discharge
+              </button>
+            </li>
           ))}
         </ul>
       </div>

@@ -17,8 +17,8 @@ def index():
 
 #test Pts route
 @app.route('/patients', methods=['GET'])
-def get_patients():
-    patients = Patient.query.all()
+def get_active_patients():
+    patients = Patient.query.filter_by(is_active=True).all()
     return jsonify([p.to_dict() for p in patients])
 
 @app.route("/patients", methods=["POST"])
@@ -36,6 +36,35 @@ def add_patient():
     db.session.commit()
 
     return jsonify(new_patient.to_dict()), 201
+
+@app.route("/patients/<int:patient_id>/discharge", methods=["PATCH"])
+def discharge_patient(patient_id):
+    patient = Patient.query.get(patient_id)
+    if not patient:
+        return jsonify({"error": "Patient not found"}), 404
+
+    patient.is_active = False
+    db.session.commit()
+
+    return jsonify({"message": f"Patient {patient_id} discharged."}), 200
+
+@app.route("/visits", methods=["POST"])
+def create_visit():
+    data = request.get_json()
+    patient_id = data.get("patient_id")
+
+    if not patient_id:
+        return jsonify({"error": "Patient ID is required"}), 400
+
+    # Get the current visit count for the patient
+    visit_count = Visit.query.filter_by(patient_id=patient_id).count()
+    new_visit_number = visit_count + 1
+
+    visit = Visit(visit_number=new_visit_number, patient_id=patient_id)
+    db.session.add(visit)
+    db.session.commit()
+
+    return jsonify(visit.to_dict()), 201
 
 if __name__ == "__main__":
     app.run(debug=True, host="localhost")
