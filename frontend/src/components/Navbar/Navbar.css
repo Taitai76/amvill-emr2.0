@@ -1,0 +1,44 @@
+/* src/components/Navbar/Navbar.css */
+
+.header {
+  background-color: #282c34;
+  padding: 1em;
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+nav a {
+  color: #61dafb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a.active {
+  border-bottom: 2px solid #61dafb;
+}
+
+.nav-logo {
+  width: 128px; /* Default width */
+  height: auto;
+  align-items: left;
+  padding: auto;
+}
+
+@media (max-width: 768px) {
+  nav .nav-logo {
+    width: 75px; /* Smaller width on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  nav .logo {
+    width: 75px; /* Even smaller width on very small screens */
+  }
+}

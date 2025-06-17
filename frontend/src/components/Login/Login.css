@@ -1,0 +1,38 @@
+/* src/components/Login/Login.css */
+
+.login-page {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1em;
+}
+
+input {
+  padding: 0.5em;
+  margin: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 0.5em 1em;
+  margin-top: 1em;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+}
+
+.forgot-password-button {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
