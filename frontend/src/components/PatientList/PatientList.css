@@ -1,24 +1,33 @@
-.patient-box{
-    border: 2px solid;
-    padding: 1em;
-    margin-right: 1em; 
-    position: relative;
+.patient-box {
+  border: 2px solid;
+  padding: 3em 1em 1em 1em;  /* Extra top padding so button isn't squeezed */
+  margin-right: 1em;
+  position: relative;
+  width: 250px; /* Fixed width for consistent layout */
+  min-height: 300px; /* Ensures box has enough height even with 0 patients */
+  background-color: #333; /* Optional for contrast */
+  border-radius: 8px;
 }
 
 .patient-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.patient-list ul{
-    list-style: none;
-    padding: 0
+
+.patient-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
 .patient-list li {
   margin: 0.5em 0;
   font-size: large;
   color: white;
+  word-break: break-word; /* Prevents long names from breaking the box */
+  text-align: center;
 }
 
 .add-patient-btn {
@@ -31,6 +40,8 @@
   padding: 0.5em 1em;
   border-radius: 4px;
   cursor: pointer;
+  z-index: 1;
+  white-space: nowrap;
 }
 
 .discharge-btn {
