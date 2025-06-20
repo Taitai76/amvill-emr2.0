@@ -1,11 +1,11 @@
 .patient-box {
-  border: 2px solid;
-  padding: 3em 1em 1em 1em;  /* Extra top padding so button isn't squeezed */
+  width: 250px;
+  flex-shrink: 0;
+  min-height: 400px;
+  padding: 3em 1em 1em 1em;
   margin-right: 1em;
   position: relative;
-  width: 250px; /* Fixed width for consistent layout */
-  min-height: 300px; /* Ensures box has enough height even with 0 patients */
-  background-color: #333; /* Optional for contrast */
+  background-color: #333;
   border-radius: 8px;
 }
 

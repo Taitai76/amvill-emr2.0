@@ -36,7 +36,7 @@ function PatientList() {
   return (
     <div className="patient-box">
       <button className="add-patient-btn" onClick={() => setIsModalOpen(true)}>
-        Add Patient
+        New Patient
       </button>
       <AddPatientModal
         isOpen={isModalOpen}

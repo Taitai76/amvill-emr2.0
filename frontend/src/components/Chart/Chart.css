@@ -1,5 +1,9 @@
-.chart-box{
-    border: 2px solid;
-    padding: 1em;
-    flex-grow: 1;
+.chart-box {
+  border: 2px solid;
+  padding: 1em;
+  flex-grow: 1;
+  min-width: 0;
+  overflow-y: auto;
+  background-color: #1e1e1e; /* Optional: to match dark theme */
+  border-radius: 8px;
 }
