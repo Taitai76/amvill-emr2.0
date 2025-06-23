@@ -26,8 +26,20 @@
   margin: 0.5em 0;
   font-size: large;
   color: white;
-  word-break: break-word; /* Prevents long names from breaking the box */
+  word-break: break-word; 
   text-align: center;
+}
+
+.patient-list li:hover {
+  background-color: #444;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.selected-patient {
+  background-color: #555;
+  font-weight: bold;
+  border-radius: 4px;
 }
 
 .add-patient-btn {

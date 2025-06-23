@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./PatientList.css";
 import AddPatientModal from "../AddPatientModal/AddPatientModal";
 import PatientSearch from "./PatientSearch";
+import Chart from "../Chart/Chart";
 
 function PatientList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [patients, setPatients] = useState([]);
+  const [selectedPatient, setSelectedPatient] = useState(null);
 
   const fetchPatients = () => {
     fetch("http://127.0.0.1:5000/patients")
@@ -55,7 +57,13 @@ function PatientList() {
       <div className="patient-list">
         <ul>
           {patients.map((patient) => (
-            <li key={patient.id}>
+            <li
+              key={patient.id}
+              onClick={() => setSelectedPatient(patient)}
+              className={
+                selectedPatient?.id === patient.id ? "selected-patient" : ""
+              }
+            >
               {patient.name}
               <button
                 onClick={() => handleDischarge(patient.id)}
@@ -67,6 +75,7 @@ function PatientList() {
           ))}
         </ul>
       </div>
+      <Chart patient={selectedPatient} />
     </div>
   );
 }
