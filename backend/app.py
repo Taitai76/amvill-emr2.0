@@ -37,6 +37,35 @@ def add_patient():
 
     return jsonify(new_patient.to_dict()), 201
 
+@app.route("/patients/<int:patient_id>/activate", methods=["PATCH"])
+def activate_patient(patient_id):
+    patient = Patient.query.get(patient_id)
+    if not patient:
+        return jsonify({"error": "Patient not found"}), 404
+
+    patient.is_active = True
+    db.session.commit()
+
+    return jsonify(patient.to_dict()), 200
+
+@app.route("/patients/search", methods=["GET"])
+def search_patients():
+    name = request.args.get("name", "")
+    dob = request.args.get("dob", "")
+
+    print("Searching for name:", name)
+    print("Searching for dob:", dob)
+
+    query = Patient.query.filter(Patient.is_active == False)
+
+    if name:
+        query = query.filter(Patient.name.ilike(f"%{name}%"))
+    if dob:
+        query = query.filter(Patient.dob == dob)
+
+    results = query.all()
+    return jsonify([p.to_dict() for p in results])
+
 @app.route("/patients/<int:patient_id>/discharge", methods=["PATCH"])
 def discharge_patient(patient_id):
     patient = Patient.query.get(patient_id)

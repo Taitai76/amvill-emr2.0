@@ -2,7 +2,7 @@
   width: 250px;
   flex-shrink: 0;
   min-height: 400px;
-  padding: 3em 1em 1em 1em;
+  padding: 4em 1em 1em 1em; /* top padding increased from 3em to 4em */
   margin-right: 1em;
   position: relative;
   background-color: #333;
@@ -31,9 +31,6 @@
 }
 
 .add-patient-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   background: #61dafb;
   color: white;
   border: none;
@@ -57,4 +54,31 @@
 
 .discharge-btn:hover {
   background: #c0392b;
+}
+
+.button-bar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lookup-btn {
+  background: #ccc;
+  color: black;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.add-patient-btn,
+.lookup-btn {
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  font-weight: bold;
+  height: 40px;
 }

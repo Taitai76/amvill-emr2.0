@@ -1,0 +1,35 @@
+.search-container {
+  margin-bottom: 1em;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.search-results ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5em;
+}
+
+.search-results li {
+  margin: 0.5em 0;
+  padding: 0.5em;
+  background: #444;
+  color: white;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-results li button {
+  background: #61dafb;
+  color: white;
+  border: none;
+  padding: 0.3em 0.8em;
+  border-radius: 4px;
+  cursor: pointer;
+}

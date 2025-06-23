@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./PatientList.css";
 import AddPatientModal from "../AddPatientModal/AddPatientModal";
+import PatientSearch from "./PatientSearch";
 
 function PatientList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,14 +36,22 @@ function PatientList() {
 
   return (
     <div className="patient-box">
-      <button className="add-patient-btn" onClick={() => setIsModalOpen(true)}>
-        New Patient
-      </button>
+      <div className="button-bar">
+        <button
+          className="add-patient-btn"
+          onClick={() => setIsModalOpen(true)}
+        >
+          New Patient
+        </button>
+        <PatientSearch onActivate={(p) => setPatients([...patients, p])} />
+      </div>
+
       <AddPatientModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onAddPatient={handleAddPatient}
       />
+
       <div className="patient-list">
         <ul>
           {patients.map((patient) => (
