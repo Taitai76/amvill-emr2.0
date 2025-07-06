@@ -4,10 +4,10 @@ import AddPatientModal from "../AddPatientModal/AddPatientModal";
 import PatientSearch from "./PatientSearch";
 import Chart from "../Chart/Chart";
 
-function PatientList() {
+function PatientList({ onSelectPatient }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [patients, setPatients] = useState([]);
-  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [selectedPatientId, setSelectedPatientId] = useState(null);
 
   const fetchPatients = () => {
     fetch("http://127.0.0.1:5000/patients")
@@ -59,9 +59,12 @@ function PatientList() {
           {patients.map((patient) => (
             <li
               key={patient.id}
-              onClick={() => setSelectedPatient(patient)}
+              onClick={() => {
+                onSelectPatient(patient); 
+                setSelectedPatientId(patient.id); 
+              }}
               className={
-                selectedPatient?.id === patient.id ? "selected-patient" : ""
+                selectedPatientId === patient.id ? "selected-patient" : ""
               }
             >
               {patient.name}
@@ -75,7 +78,6 @@ function PatientList() {
           ))}
         </ul>
       </div>
-      <Chart patient={selectedPatient} />
     </div>
   );
 }

@@ -3,7 +3,7 @@ from flask_cors import CORS
 from models import db, Patient
 
 app = Flask(__name__)
-CORS(app)  # Allows React frontend to connect
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # Set up PostgreSQL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://emr_user:password@localhost/emr_dev'

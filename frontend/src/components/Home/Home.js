@@ -1,18 +1,21 @@
-import React from 'react'
-import Navbar from '../Navbar/Navbar'
-import Chart from '../Chart/Chart'
-import './Home.css'
-import PatientList from '../PatientList/PatientList';
+import React, { useState } from "react";
+import Navbar from "../Navbar/Navbar";
+import Chart from "../Chart/Chart";
+import "./Home.css";
+import PatientList from "../PatientList/PatientList";
+
 function Home() {
+  const [selectedPatient, setSelectedPatient] = useState(null);
+
   return (
-    <div >
+    <div>
       <Navbar />
       <div className="patient-info">
-        <PatientList />
-        <Chart />
+        <PatientList onSelectPatient={setSelectedPatient} />
+        <Chart patient={selectedPatient} />
       </div>
     </div>
   );
 }
 
-export default Home
+export default Home;
