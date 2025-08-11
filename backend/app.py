@@ -5,10 +5,11 @@ from flask_migrate import Migrate
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": ["https://amvill.co", "https://www.amvill.co"]}})
 
 # Set up PostgreSQL
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://emr_user:password@localhost/emr_dev'
+import os
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Render will set this
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
