@@ -1,19 +1,32 @@
-
+html, body, #root { height: 100%; }
+body { background: linear-gradient(to bottom right, #61dafb, #282c34); }
 
 .landing-page {
-  height: 100vh;
-  background: linear-gradient(to bottom right, #61dafb, #282c34);
-  color: white;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
+  color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sticky navbar */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.50);
+  padding: 1em 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .landing-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em 2em;
 }
 
 .landing-logo {
@@ -21,29 +34,13 @@
   animation: fadeIn 1.5s ease;
 }
 
-.login-btn {
-  padding: 0.5em 1.2em;
-  border: none;
-  border-radius: 4px;
-  background-color: white;
-  color: #282c34;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.login-btn:hover {
-  transform: scale(1.05);
-}
-
 .landing-content {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
-  padding: 0 2em;
+  padding: 0 2em 3rem;
 }
 
 .landing-content h1 {
@@ -55,69 +52,29 @@
 .landing-content p {
   font-size: 1.2rem;
   max-width: 600px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .cta-btn {
-  padding: 0.75em 1.5em;
-  border: none;
-  border-radius: 4px;
-  background-color: white;
-  color: #282c34;
-  font-size: 1rem;
+  margin: 1.25em 0 0;
+  padding: 0.8em 1.5em;
+  background-color: #61dafb;
+  color: white;
+  font-size: 1.1rem;
   font-weight: bold;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: background 0.3s ease;
 }
+.cta-btn:hover { background-color: #4fbada; }
 
-.cta-btn:hover {
-  transform: scale(1.05);
-}
-
-.landing-footer {
-  text-align: center;
-  padding: 1em;
-  font-size: 0.9rem;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 768px) {
-  .landing-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .login-btn {
-    align-self: flex-end;
-    margin-top: 1em;
-  }
-
-  .landing-content h1 {
-    font-size: 2rem;
-  }
-
-  .landing-content p {
-    font-size: 1rem;
-  }
-}
-
+/* Feature grid */
 .features {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* 2 per row on desktop */
   gap: 2em;
-  margin: 3em 0;
+  margin: 3em 0 0;
   width: 100%;
   max-width: 1000px;
 }
@@ -130,6 +87,12 @@
   transition: background 0.3s ease;
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertical centering */
+  align-items: center;     /* Center horizontally */
+  text-align: center;
+  height: 100%; /* Equal height */
 }
 
 .feature-card:hover {
@@ -138,61 +101,99 @@
 
 .feature-card h3 {
   margin-top: 0;
+  margin-bottom: 0.5em;
   color: #61dafb;
 }
 
+.feature-card p {
+  flex-grow: 1;
+}
+
+.landing-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 1em;
+  font-size: 0.9rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Menu Button + Dropdown */
+.menu-wrapper { position: relative; }
+.menu-btn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+.menu-btn:focus { outline: 2px solid #61dafb; }
+
+.dropdown-menu {
+  position: absolute;
+  top: 2.5em;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.5em;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  z-index: 99;
+}
+.dropdown-menu button {
+  background: none;
+  border: none;
+  padding: 0.5em 1em;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.dropdown-menu button:hover { background-color: #f0f0f0; }
+.dropdown-menu button:focus { outline: 2px solid #61dafb; }
+
+/* Modal demo form */
+.demo-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 100;
+}
+.demo-form {
+  background: white;
+  color: #282c34;
+  padding: 2em;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+}
+.demo-form input,
+.demo-form textarea {
+  width: 100%;
+  margin-bottom: 1em;
+  padding: 0.75em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.form-actions { display: flex; justify-content: space-between; }
+.demo-form button[disabled] { opacity: 0.7; cursor: not-allowed; }
+.form-error { color: #b00020; margin-top: 0.5em; }
+.demo-success p { color: #222; margin-bottom: 1em; }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive tweaks */
 @media (max-width: 768px) {
+  .landing-header { flex-direction: column; align-items: flex-start; }
+  .landing-content h1 { font-size: 2rem; }
+  .landing-content p { font-size: 1rem; }
   .features {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Stack on mobile */
     gap: 1.5em;
   }
 }
-
-.demo-btn {
-  margin-left: 1em;
-  background-color: transparent;
-  border: 2px solid #61dafb;
-  color: #61dafb;
-  padding: 0.5em 1em;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  color: black;
-  padding: 2em;
-  border-radius: 8px;
-  max-width: 400px;
-  width: 90%;
-}
-
-.modal-content input,
-.modal-content textarea {
-  width: 100%;
-  margin-bottom: 1em;
-  padding: 0.5em;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.modal-content .button-group {
-  display: flex;
-  justify-content: space-between;
-}
-
-
