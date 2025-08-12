@@ -10,16 +10,15 @@ function PatientList({ onSelectPatient }) {
   const [selectedPatientId, setSelectedPatientId] = useState(null);
   const API = process.env.REACT_APP_API_URL;
 
-  const fetchPatients = () => {
-    fetch(`${API}/patients`)
-      .then((res) => res.json())
-      .then((data) => setPatients(data))
-      .catch((err) => console.error("Error fetching patients:", err));
-  };
-
   useEffect(() => {
+    const fetchPatients = () => {
+      fetch(`${API}/patients`)
+        .then((res) => res.json())
+        .then((data) => setPatients(data))
+        .catch((err) => console.error("Error fetching patients:", err));
+    };
     fetchPatients();
-  }, [fetchPatients]);
+  }, []);
 
   const handleAddPatient = (newPatient) => {
     setPatients([...patients, newPatient]);
