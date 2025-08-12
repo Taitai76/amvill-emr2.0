@@ -8,9 +8,10 @@ function PatientList({ onSelectPatient }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [patients, setPatients] = useState([]);
   const [selectedPatientId, setSelectedPatientId] = useState(null);
+  const API = process.env.REACT_APP_API_URL;
 
   const fetchPatients = () => {
-    fetch("http://127.0.0.1:5000/patients")
+    fetch(`${API}/patients`)
       .then((res) => res.json())
       .then((data) => setPatients(data))
       .catch((err) => console.error("Error fetching patients:", err));
@@ -25,7 +26,7 @@ function PatientList({ onSelectPatient }) {
   };
 
   const handleDischarge = (id) => {
-    fetch(`http://127.0.0.1:5000/patients/${id}/discharge`, {
+    fetch(`${API}/patients/${id}/discharge`, {
       method: "PATCH",
     }).then((res) => {
       if (res.ok) {

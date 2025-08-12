@@ -14,19 +14,21 @@ function PatientSearch({ onActivate }) {
   const [dob, setDob] = useState("");
   const [results, setResults] = useState([]);
 
+  const API = process.env.REACT_APP_API_URL;
+  
   const handleSearch = () => {
     const queryParams = new URLSearchParams();
     if (name) queryParams.append("name", name);
     if (dob) queryParams.append("dob", formatDOB(dob));
 
-    fetch(`http://127.0.0.1:5000/patients/search?${queryParams}`)
+    fetch(`${API}/patients/search?${queryParams}`)
       .then((res) => res.json())
       .then((data) => setResults(data))
       .catch(console.error);
   };
 
   const handleActivate = (id) => {
-    fetch(`http://127.0.0.1:5000/patients/${id}/activate`, { method: "PATCH" })
+    fetch(`${API}/patients/${id}/activate`, { method: "PATCH" })
       .then((res) => res.json())
       .then((updatedPatient) => {
         onActivate(updatedPatient);

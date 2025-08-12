@@ -1,7 +1,7 @@
 import "./Login.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "./Amvill.png"; // adjust path if needed
+import logo from "./Amvill.png";
 
 function Login() {
   const [email, setEmail] = useState("");

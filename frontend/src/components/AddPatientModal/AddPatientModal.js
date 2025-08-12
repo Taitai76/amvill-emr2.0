@@ -6,10 +6,12 @@ function AddPatientModal({ isOpen, onClose, onAddPatient }) {
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
 
+  const API = process.env.REACT_APP_API_URL;
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://127.0.0.1:5000/patients", {
+    fetch(`${API}/patients`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
