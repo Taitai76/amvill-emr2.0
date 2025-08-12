@@ -9,7 +9,10 @@ CORS(app, resources={r"/*": {"origins": ["https://amvill.co", "https://www.amvil
 
 # Set up PostgreSQL
 import os
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Render will set this
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    'SQLALCHEMY_DATABASE_URI',
+    'postgresql://emr_user:password@localhost/emr_dev'  # fallback for local dev
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
