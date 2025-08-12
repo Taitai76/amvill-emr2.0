@@ -17,10 +17,6 @@ function PatientList({ onSelectPatient }) {
       .catch((err) => console.error("Error fetching patients:", err));
   };
 
-  useEffect(() => {
-    fetchPatients();
-  }, []);
-
   const handleAddPatient = (newPatient) => {
     setPatients([...patients, newPatient]);
   };
