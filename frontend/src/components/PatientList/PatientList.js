@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./PatientList.css";
 import AddPatientModal from "../AddPatientModal/AddPatientModal";
 import PatientSearch from "./PatientSearch";
-import Chart from "../Chart/Chart";
+
 
 function PatientList({ onSelectPatient }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,6 +16,10 @@ function PatientList({ onSelectPatient }) {
       .then((data) => setPatients(data))
       .catch((err) => console.error("Error fetching patients:", err));
   };
+
+  useEffect(() => {
+    fetchPatients();
+  }, [fetchPatients]);
 
   const handleAddPatient = (newPatient) => {
     setPatients([...patients, newPatient]);
